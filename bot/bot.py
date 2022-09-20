@@ -1,6 +1,7 @@
 import discord
 from config import Discord_Token
 from discord.ext import commands
+from modules import ticker 
 
 TOKEN = Discord_Token
 bot = commands.Bot(command_prefix='$')
