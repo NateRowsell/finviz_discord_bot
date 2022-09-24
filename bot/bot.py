@@ -20,12 +20,9 @@ async def on_error(event, *args):
 
 @bot.command
 async def get_ticker_data(ctx, arg):
-    # arg will be ticker to query 
-    try:
-        response = "get data function here" # response data from ticker.py
-    except:
-        response = (f'{arg} is not a valid ticker')
 
-    await ctx.send(response) # response 
+    response = ticker.get_data(arg)
+
+    await ctx.send(response)
 
 
