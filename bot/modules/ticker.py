@@ -23,7 +23,7 @@ async def get_data(ticker):
     except:
         return 'There was an unexpected error parsing the web page. Please make sure the ticker is correct'
     
-    soup = BeautifulSoup(page.content,'html.parser')
+    soup = BeautifulSoup(page.content,'html.parser',from_encoding='iso-8859-1')
 
     #table of all data
     #if ticker does not exist the table will not exist
