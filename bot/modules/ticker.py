@@ -14,7 +14,6 @@ async def get_data(ticker):
     headers = {
         "user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edg/101.0.1210.47",
         "accept-language":"en-US,en;q=0.9,it;q=0.8,es;q=0.7",
-        "accept-encoding":"gzip, deflate, br",
         "referer":"https://prerender.io/"
     }
 
@@ -27,7 +26,12 @@ async def get_data(ticker):
     soup = BeautifulSoup(page.content,'html.parser')
 
     #table of all data
-    table = soup.find(class_='snapshot-table2')
+    #if ticker does not exist the table will not exist
+    try:
+        table = soup.find(class_='snapshot-table2')
+    except:
+        return 'There was an unexpected error parsing the web page. Please make sure the ticker is correct'
+
 
     #get names and values from table
     names = table.find_all(class_='snapshot-td2-cp')
@@ -55,19 +59,19 @@ async def get_data(ticker):
 
     result = await f"""
         Ticker - {ticker}
-        {price}\n
-        {market_cap}\n
-        {volume}\n
-        {avg_volume}\n
-        {rel_volume}\n
-        {range_52_week}\n
-        {insider_own}\n
-        {inst_own}\n
-        {shs_outstand}\n
-        {shs_float}\n
-        {short_float}\n
-        {short_ratio}\n
-        {shortable}\n
+        {price}
+        {market_cap}
+        {volume}
+        {avg_volume}
+        {rel_volume}
+        {range_52_week}
+        {insider_own}
+        {inst_own}
+        {shs_outstand}
+        {shs_float}
+        {short_float}
+        {short_ratio}
+        {shortable}
     """
 
     return result 
